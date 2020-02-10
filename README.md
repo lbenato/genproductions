@@ -1,4 +1,6 @@
-## Instructions: forked branch
+# Forked branch of genproductions for UHH LLP group
+
+## Instructions
 ```
 bash #if you like bash
 source /etc/profile.d/modules.sh #if you like bash
@@ -12,13 +14,14 @@ git cms-init
 scram b -j 10
 ```
 
-##Clone this forked repo
+## Clone this forked repo
 
 ```
 mkdir -p Configuration
 cd Configuration
 git clone https://github.com/lbenato/genproductions.git GenProduction
 ```
+## cmsDrive commands
 
 # genproductions
 Generator fragments for MC production
