@@ -14,14 +14,44 @@ git cms-init
 scram b -j 10
 ```
 
-## Clone this forked repo
+Clone this forked repo:
 
 ```
 mkdir -p Configuration
 cd Configuration
 git clone https://github.com/lbenato/genproductions.git GenProduction
+cd $CMSSW_BASE/src
+scram b -j 32
 ```
+
+If you got compilation errors on Configuration/GenProduction/python/ThirteenTeV/DelayedJets/rpvNeutralino/GluinoGluinoToNeutralinoNeutralinoTo2T2B2S_template_cff.py and on Configuration/GenProduction/python/ThirteenTeV/DelayedJets/gluinoGMSB/gluinoGMSB_template.py, comment lines with "@" and put a number (1, for example). It does not impact our fragments.
+
 ## cmsDrive commands
+
+Move to the main CMSSW area:
+```
+cd $CMSSW_BASE/src
+```
+
+### GEN-SIM for Heavy Higgs (Matthew's datacards)
+
+In this fragment, the whole process is handled by pythia, no need of external LHE.
+
+#### 2018 Full sim
+```
+cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --fileout file:test_M.root --mc --eventcontent RAWSIM --datatier GEN-SIM --conditions auto:phase1_2018_realistic --step GEN,SIM --python_filename test_M_1_cfg.py --no_exec -n 5
+```
+#### 2018 Fast sim
+```
+cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --conditions auto:phase1_2018_realistic --fast  -n 5 --era Run2_2018_FastSim --eventcontent RAWSIM -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2018Collision --mc --fileout file:test_M_FastSim.root --python_filename test_M_FastSim_1_cfg.py
+```
+
+### AODSIM for Heavy Higgs (Matthew's datacards)
+
+#### 2018 Fast sim
+```
+cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --conditions auto:phase1_2018_realistic --fast  -n 5 --era Run2_2018_FastSim --eventcontent AODSIM -s GEN,SIM,RECOBEFMIX,DIGI:pdigi_valid,L1,DIGI2RAW,L1Reco,RECO --datatier GEN-SIM-DIGI-RECO --beamspot Realistic25ns13TeVEarly2018Collision --mc --fileout file:test_M_FastSim_AOD.root --python_filename test_M_FastSim_AOD_1_cfg.py
+```
 
 # genproductions
 Generator fragments for MC production
