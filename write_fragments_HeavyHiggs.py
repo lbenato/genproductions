@@ -8,7 +8,7 @@ from array import array
 #mS = [150]
 #ctaus = [1000, 10000]
 
-DATACARDDIR = 'python/ThirteenTeV/HeavyHiggs/'
+DATACARDDIR = 'python/'
 
 def write(mH, mS, ctaus):
     for H in mH:
@@ -114,7 +114,7 @@ def write(mH, mS, ctaus):
                 card +=  '            "35:20:meMode= 100", \n'
  
                 card +=  '# Enable H0-->X(mumu)X(mumu) decay \n'
-                card +=  '"35:addChannel = 1 1. 100 6000113 6000113",# Enable H0-->X(mumu)X(jetjet) decay \n'
+                card +=  '            "35:addChannel = 1 1. 100 6000113 6000113",# Enable H0-->X(mumu)X(jetjet) decay \n'
                 card +=  '#            "35:addChannel = 1 1. 100 6000111 6000113", \n'
                 card +=  '            "35:onMode = off", \n'
                 card +=  '#`           "35:onIfAny = 6000111 6000113" \n'
@@ -142,29 +142,29 @@ def write(mH, mS, ctaus):
 ######
 mH = [1000]
 mS = [400,150]
-ctaus = [1000, 10000]
+ctaus = [500, 1000, 2000, 5000, 10000]
 write(mH, mS, ctaus)
 
 ######
 mH = [600]
 mS = [150,50]
-ctaus = [1000, 10000]
+ctaus = [500, 1000, 2000, 5000, 10000]
 write(mH, mS, ctaus)
 
 ######
 mH = [400]
 mS = [100,50]
-ctaus = [1000, 10000]
+ctaus = [500, 1000, 2000, 5000, 10000]
 write(mH, mS, ctaus)
 
 ######
 mH = [200]
 mS = [50,25]
-ctaus = [1000, 10000]
+ctaus = [500, 1000, 2000, 5000, 10000]
 write(mH, mS, ctaus)
 
 ######
 mH = [125]
 mS = [55,25,8]
-ctaus = [1000, 10000]
+ctaus = [500, 1000, 2000, 5000, 10000]
 write(mH, mS, ctaus)
