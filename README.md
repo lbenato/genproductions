@@ -26,7 +26,52 @@ scram b -j 32
 
 If you got compilation errors on Configuration/GenProduction/python/ThirteenTeV/DelayedJets/rpvNeutralino/GluinoGluinoToNeutralinoNeutralinoTo2T2B2S_template_cff.py and on Configuration/GenProduction/python/ThirteenTeV/DelayedJets/gluinoGMSB/gluinoGMSB_template.py, comment lines with "@" and put a number (1, for example). It does not impact our fragments.
 
-## cmsDrive commands
+## Script to produce gen fragments for Heavy Higgs (Matthew's datacards)
+
+In these fragments, the whole process is handled by pythia, no need of external LHE.
+
+```
+cd $CMSSW_BASE/src/Configuration/GenProduction
+python write_fragments_HeavyHiggs.py
+```
+
+Fragments will be saved in `python` folder.
+
+## Script to launch cmsDrive commands
+
+Example for 2018 production (Moriond 2020): https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_setup/EXO-RunIIAutumn18DRPremix-02341
+
+This script creates the needed python files for each step of the generation process. It must be launched from `$CMSSW_BASE/src` folder. Currently it's quite in a raw shape, it requires to comment-uncomment the needed steps (GEN-SIM, etc.).
+
+```
+cd $CMSSW_BASE/src
+python Configuration/GenProduction/cms_drive_HeavyHiggs_2018.py
+```
+
+## Scripts to launch generation via crab
+
+These scripts allow to submit each step of the generation process via crab. They must be copied and launched from `$CMSSW_BASE/src` folder.
+
+```
+cp $CMSSW_BASE/src/Configuration/GenProduction/scripts_to_submit/*.py $CMSSW_BASE/src/.
+cd $CMSSW_BASE/src
+```
+
+* `crab_requests_lists_HeavyHiggs.py` includes dictionaries with the dataset names, crab areas, etc.
+* `launch_crab.py` allows the actual submission.
+
+Example for GEN-SIM step:
+
+```
+cd $CMSSW_BASE/src
+python launch_crab.py -l HeavyHiggs -s GENSIM -a test
+```
+
+Possible options:
+* `-s` (step) : GENSIM, RAWDIGI, AODSIM, MINIAODSIM
+* `-a` (action) : test, submit, resubmit, status, kill, report
+
+## cmsDrive commands -- OBSOLETE
 
 Move to the main CMSSW area:
 ```
