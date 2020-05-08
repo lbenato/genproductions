@@ -71,19 +71,17 @@ Possible options:
 * `-s` (step) : GENSIM, RAWDIGI, AODSIM, MINIAODSIM
 * `-a` (action) : test, submit, resubmit, status, kill, report
 
-## cmsDrive commands -- OBSOLETE
+## OBSOLETE
 
-Move to the main CMSSW area:
-```
-cd $CMSSW_BASE/src
-```
+Please disregard next section. These were some tests to compare full sim and fast sim.
 
-### GEN-SIM for Heavy Higgs (Matthew's datacards)
+
+#### GEN-SIM for Heavy Higgs (Matthew's datacards)
 
 In this fragment, the whole process is handled by pythia, no need of external LHE.
 Example for 2018 production (Moriond 2020): https://cms-pdmv.cern.ch/mcm/public/restapi/requests/get_setup/EXO-RunIIAutumn18DRPremix-02341
 
-#### 2018 Full sim
+##### 2018 Full sim
 Test:
 
 ```
@@ -95,7 +93,7 @@ Adapted from Moriond 2020 campaign:
 cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --fileout file:test_M.root --mc --eventcontent RAWSIM --datatier GEN-SIM --conditions 102X_upgrade2018_realistic_v15 --step GEN,SIM --nThreads 8 --geometry DB:Extended --era Run2_2018 --python_filename test_M_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 5
 ```
 
-#### 2018 Fast sim
+##### 2018 Fast sim
 Test:
 ```
 cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --conditions auto:phase1_2018_realistic --fast  -n 5 --era Run2_2018_FastSim --eventcontent RAWSIM -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2018Collision --mc --fileout file:test_M_FastSim.root --python_filename test_M_FastSim_1_cfg.py
@@ -106,25 +104,25 @@ From Moriond 2020 campaign:
 cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --fileout file:test_M_FastSim.root --mc --eventcontent RAWSIM --datatier GEN-SIM --conditions 102X_upgrade2018_realistic_v15 --step GEN,SIM --nThreads 8 --geometry DB:Extended --era Run2_2018_FastSim --fast --python_filename test_M_FastSim_1_cfg.py --no_exec -n 5
 ```
 
-### RAW-GEN-SIM for Heavy Higgs (Matthew's datacards)
+#### RAW-GEN-SIM for Heavy Higgs (Matthew's datacards)
 Recommended dataset for mixing: dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW
 
-#### 2018 Full sim
+##### 2018 Full sim
 
 From Moriond 2020 campaign, full sim, GEN-SIM needed as input:
 ```
 cmsDriver.py --fileout file:test_M.root  --pileup_input "dbs:/Neutrino_E-10_gun/RunIISummer17PrePremix-PUAutumn18_102X_upgrade2018_realistic_v15-v1/GEN-SIM-DIGI-RAW" --mc --eventcontent PREMIXRAW --datatier GEN-SIM-RAW --conditions 102X_upgrade2018_realistic_v15 --step DIGI,DATAMIX,L1,DIGI2RAW,HLT:@relval2018 --procModifiers premix_stage2 --nThreads 8 --geometry DB:Extended --datamix PreMix --era Run2_2018 ---python_filename test_M_1_cfg.py --no_exec --customise Configuration/DataProcessing/Utils.addMonitoring -n 5
 ```
-#### 2018 Fast sim
+##### 2018 Fast sim
 From Moriond 2020 campaign, performs everything in one step, but it does not work properly:
 
 ```
 #cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --datamix PreMix --pileup_input "file:PU.root" --fileout file:test_M_FastSim_with_PU.root --mc --eventcontent PREMIXRAW --datatier GEN-SIM-RAW --conditions 102X_upgrade2018_realistic_v15 --step GEN,SIM,DIGI,DATAMIX,L1,DIGI2RAW --procModifiers premix_stage2 --nThreads 8 --geometry DB:Extended --era Run2_2018_FastSim --fast --python_filename test_M_FastSim_with_PU_1_cfg.py --no_exec -n 5
 ```
 
-### AODSIM for Heavy Higgs (Matthew's datacards)
+#### AODSIM for Heavy Higgs (Matthew's datacards)
 
-#### 2018 Fast sim
+##### 2018 Fast sim
 Test. Warning: recipe without pile-up:
 ```
 cmsDriver.py Configuration/GenProduction/python/fragment_Matthew.py --conditions auto:phase1_2018_realistic --fast  -n 5 --era Run2_2018_FastSim --eventcontent AODSIM -s GEN,SIM,RECOBEFMIX,DIGI:pdigi_valid,L1,DIGI2RAW,L1Reco,RECO --datatier GEN-SIM-DIGI-RECO --beamspot Realistic25ns13TeVEarly2018Collision --mc --fileout file:test_M_FastSim_AOD.root --python_filename test_M_FastSim_AOD_1_cfg.py
